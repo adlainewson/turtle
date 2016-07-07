@@ -52,7 +52,9 @@ Please also read the section on [Running Long Jobs at Lower Priority](#nice).
 
 <a id="howto"></a>
 ### How to Connect 
-There are two steps to connecting to the server. 
+Before you can connect to the server you need to have an account set up for you. Email Masaru Kiyota at `masaru.kiyota@ubc.ca`, and specify that you would like an account on the graduate computation server in the economics department.
+
+Once you have an account, there are two steps to connecting to the server. 
  1. Connect to the UBC virtual private network (VPN)
  2. Once on the VPN, connect to the server
 

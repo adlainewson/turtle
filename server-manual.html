@@ -228,11 +228,9 @@ code {
 
 <h2>VSE Server Manual</h2>
 
-<p><center>
-<img src='turtle.jpg' />
-</center></p>
+<p><center><img src='turtle.jpg' /></center></p>
 
-<p>This brief tutorial will familiarize you with how to connect to and use the VSE linux server. You first need to have an account set up for you (unrelated to your CWL).</p>
+<p>This brief tutorial will familiarize you with how to connect to and use the VSE linux server. You first need to have an account set up. Email Masaru Kiyota at masaru.kiyota@ubc.ca to get an account set up, and specify that you would like an account on the graduate computation server in the economics department.</p>
 
 <h3>Contents</h3>
 
@@ -240,9 +238,11 @@ code {
 
 <p><a href="#policy">Server use policy</a></p>
 
-<p><a href="#howto">How to connect</a><br>
- 1. <a href="#vpn">Connecting to the UBC VPN</a><br>
- 2. <a href="#vncssh">Connecting to the server</a></p>
+<p><a href="#howto">How to connect</a>
+<ol>
+ <li> <a href="#vpn">Connecting to the UBC VPN</a> </li>
+ <li> <a href="#vncssh">Connecting to the server</a> </li>
+</ol>
 
 <p><a href="#transfer">Transferring files</a></p>
 
@@ -290,8 +290,10 @@ code {
 
 <h3>How to Connect</h3>
 
-<p>There are two steps to connecting to the server. <br>
- 1. Connect to the UBC virtual private network (VPN)<br>
+<p>Before you can connect to the server you need to have an account set up for you. Email Masaru Kiyota at <code>masaru.kiyota@ubc.ca</code>, and specify that you would like an account on the graduate computation server in the economics department.</p>
+
+<p>Once you have an account, there are two steps to connecting to the server. 
+ 1. Connect to the UBC virtual private network (VPN)
  2. Once on the VPN, connect to the server</p>
 
 <p>Think of our server as a house in a gated community. Connecting to the UBC VPN (1) is like getting let into the gated community, and connecting to the server (2) is like getting let into the house. </p>
@@ -318,15 +320,11 @@ code {
 
 <p>When you connect to the server using VNC, you will have a window open with a miniature window manager running inside; here's a screenshot of me using VNC to access the server; you can see my desktop, and Stata running on the server</p>
 
-<p><center>
-<a href="http://i.imgur.com/fxXIyb7.png"><img src="http://i.imgur.com/fxXIyb7.png" style="width: 300px;"/></a>
-</center></p>
+<p><a href="http://i.imgur.com/fxXIyb7.png"><center><img src="http://i.imgur.com/fxXIyb7.png" style="width: 300px;"/></a></center></p>
 
 <p>Alternatively, you can use SSH alone. Unless you are running linux on your personal computer, this will mean that you can only interface with the computer through the terminal. Here's a screenshot of me running matlab on the server after connecting through SSH, side by side with MATLAB running locally.</p>
 
-<p><center>
-<a href="http://i.imgur.com/5jRmTgP.png"><img src="http://i.imgur.com/5jRmTgP.png" style="width: 300px" /></a>
-</center></p>
+<p><a href="http://i.imgur.com/5jRmTgP.png"><center><img src="http://i.imgur.com/5jRmTgP.png" style="width: 300px" /></a></center></p>
 
 <p>If you want to use VNC you still have to connect via SSH, so first we'll cover that.</p>
 
@@ -344,8 +342,8 @@ ssh adlai@turtle.econ.ubc.ca
 
 <h5>Connecting via VNC</h5>
 
-<p>There are two steps:<br>
-1. Log into the server with SSH and start a vncserver.<br>
+<p>There are two steps:
+1. Log into the server with SSH and start a vncserver.
 2. Connect to the VNC server using a VNC client.</p>
 
 <p>First download a VNC client. Here are some options:</p>
@@ -366,9 +364,7 @@ ssh adlai@turtle.econ.ubc.ca
 
 <p>Once you have the client, log into the server using SSH and change your password using <code>vncpasswd</code>. Once done, type <code>vncserver -autokill</code> to start a VNC session. You will get some output that tells you what port the VNC server is using, which will be a number in the range 5900-5999. Here is a screenshot of me logging in with SSH and starting the VNC server:</p>
 
-<p><center>
-<a href="http://i.imgur.com/TkC0LNS.png"><img src="http://i.imgur.com/TkC0LNS.png" style="width: 300px" /></a>
-</center></p>
+<p><a href="http://i.imgur.com/TkC0LNS.png"><center><img src="http://i.imgur.com/TkC0LNS.png" style="width: 300px" /></a></center></p>
 
 <p>My VNC server has started at address <code>turtle.econ.ubc.ca:3</code>, the 3 refers to the port 5903. Now I can log in using my VNC client using the following information:</p>
 
@@ -389,9 +385,7 @@ vncviewer turtle.econ.ubc.ca:5903
 
 <p>If you forget the port where VNC is running, log back in using SSH and type <code>ls ~/.vnc/*.pid</code>. If you see a file ending with .pid, it means the VNC server is still running, and the port number will be shown. Here's a picture:</p>
 
-<p><center>
-<a href="http://i.imgur.com/aOIvwNj.png"><img src="http://i.imgur.com/aOIvwNj.png" style="width: 300px" /></a>
-</center></p>
+<p><a href="http://i.imgur.com/aOIvwNj.png"><center><img src="http://i.imgur.com/aOIvwNj.png" style="width: 300px" /></a></center></p>
 
 <p>I have a file there called <code>turtle.econ.ubc.ca:3.pid</code>, which means I have a VNC server running on display 3 (port 5903). To shut down the server, type <code>vncserver -kill :3</code>, changing the 3 as appropriate. </p>
 
@@ -408,15 +402,15 @@ vncviewer turtle.econ.ubc.ca:5903
 <p>Suppose you want to copy some matlab files from a local directory <code>myproject</code> to a directory in your home folder on the server called <code>myfiles</code>. From your laptop, open a terminal, navigate to <code>myproject</code>, then type </p>
 
 <p><code><pre>
-[adlai@laptop ~]$ scp myproject/* adlai@turtle.ubc.ca:/home/adlai/myfiles/
+[adlai@laptop ~]$ scp * adlai@turtle.ubc.ca:/home/adlai/myfiles/
 </pre></code></p>
 
 <p>This command says 'copy all the files (*) in <code>myproject</code>, on my machine, to the directory <code>myfiles</code>, on the server'. You will be prompted for your SSH password, then the transfer will start.</p>
 
-<p>To transfer files from the server to your local machine, you can use the same command.</p>
+<p>To transfer files from the server to your local machine, you can use the same command. The trailing <code>.</code> refers to the current working directory, so this command says copy all files from the directory <code>myfiles</code> on the server into the current working directory on my local machine.</p>
 
 <p><code><pre>
-[adlai@laptop ~]$ scp adlai@turtle.ubc.ca:/home/adlai/myfiles/* myproject/ 
+[adlai@laptop ~]$ scp adlai@turtle.ubc.ca:/home/adlai/myfiles/* .
 </pre></code></p>
 
 <p>If you are on Windows, you can accomplish something similar with a graphical SSH client like PuTTy, linked above. See the link here: <a href="http://www.it.cornell.edu/services/managed_servers/howto/file_transfer/fileputty.cfm">http://www.it.cornell.edu/services/managed<em>servers/howto/file</em>transfer/fileputty.cfm</a>.</p>
@@ -427,21 +421,20 @@ vncviewer turtle.econ.ubc.ca:5903
 
 <p>If you are connecting through VNC, you can open Stata and MATLAB directly from GNOME. They are found in the 'Other' catagory, when you click the Applications button in the top left.</p>
 
-<p><center>
-<a href="http://i.imgur.com/UcNNs6y.png"><img src="http://imgur.com/UcNNs6yl.png" style="width: 300px" /></a>
-</center></p>
+<p><a href="http://i.imgur.com/UcNNs6y.png">
+  <center><img src="http://imgur.com/UcNNs6yl.png" style="width: 300px" /></center>
+</a></p>
 
 <p>Loading a dataset will be the same as on your local machine, except that the directory structure is different. Depending on where you downloaded your dataset, it will be somewhere in your home directory (which is named after your user account). In the screenshot below, I'm looking at all the folders in my home directory, called 'adlai'.</p>
 
-<p><center>
-<a href="http://i.imgur.com/6pXMDZr.png"><img src="http://imgur.com/6pXMDZrl.png" style="width: 300px" /></a>
-</center></p>
+<p><a href="http://i.imgur.com/6pXMDZr.png">
+  <center><img src="http://imgur.com/6pXMDZrl.png" style="width: 300px" /></a></center></p>
 
 <p>For MATLAB it works similarly; here's an example. </p>
 
-<p><center>
-<a href="http://i.imgur.com/W5ItbIv.png"><img src="http://imgur.com/W5ItbIvl.png" style="width: 300px" /></a>
-</center></p>
+<p><a href="http://i.imgur.com/W5ItbIv.png">
+  <center><img src="http://imgur.com/W5ItbIvl.png" style="width: 300px" /></center>
+</a></p>
 
 <p>If you're connecting using SSH, you can use MATLAB and Stata through the command line by typing </p>
 
@@ -450,7 +443,7 @@ vncviewer turtle.econ.ubc.ca:5903
 </pre></code></p>
 
 <p>This can be a bit of a pain, so in order to create an executable link to stata in your home directory, type 
-<code><pre>
+<code>
 [adlai@turtle ~]$ ln -s /usr/local/stata14/xstata-mp stata14
 </pre></code></p>
 
@@ -515,7 +508,7 @@ nice matlab -r max_unlikelihood.m
 [adlai@turtle tmp]$ wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 [adlai@turtle tmp]$ mv .dropbox-dist/ ../; cd
 [adlai@turtle ~]$ ln -s /home/adlai/.dropbox-dist/dropboxd ~/bin/dropbox
-[adlai@turtle ~]$ ./bin/dropbox 
+[adlai@turtle ~]$ ./bin/dropbox
 </pre></code></p>
 
 <p><a id="linux"></a></p>
@@ -527,7 +520,7 @@ nice matlab -r max_unlikelihood.m
 <p>When you open a terminal you will be prompted with something like the following:</p>
 
 <p><code><pre>
-[adlai@turtle ~]$ 
+[adlai@turtle ~]$
 </pre></code></p>
 
 <p>The username and servername are self explanatory. The <code>~</code> refers to your current location (<code>~</code> means home directory). The $ is the prompt for entering a command.</p>
@@ -535,7 +528,7 @@ nice matlab -r max_unlikelihood.m
 <p>The linux directory structure is defined relative to a root directory, which is denoted by <code>/</code>. Here's what the terminal looks like when you're in the root directory.</p>
 
 <p><code><pre>
-[adlai@turtle /]$ 
+[adlai@turtle /]$
 </pre></code></p>
 
 <p>File and directory paths in UNIX use the forward slash <code>/</code> to separate directory names in a path. For example, </p>
@@ -568,7 +561,7 @@ ls /         List the root directory's contents
 ls -a        List the current directory including hidden files. Hidden files start 
              with "." 
 ls -lh       List all the file and directory names in the current directory using 
-             long format, with human-readable measures of file size (ie, Mb instead of bytes). 
+             long format, with human-readable measures of file size (ie, Mb instead of bytes).
 </pre></code></p>
 
 <p>Above I passed both arguments (the second example) and flags (the -a and -lh). Think of flags as function parameters, and arguments as function inputs. The single most important command you need in linux is the <code>man</code> command, for 'manual'. The manual page lists all the possible flags and arguments, with descriptions and often examples and even email addresses of the developers. The man command takes the application you want to learn about as its argument. So, to read more about <code>cp</code>, I would do:</p>
@@ -610,15 +603,15 @@ tail -n filename  Show the last n lines of a file.
 <p>Searching for files: The find command</p>
 
 <p><code><pre>
-find location -name filename </p>
+find location -name filename
 
-<p>find . -name aaa.txt    Finds all the files named aaa.txt in the current directory or 
+find . -name aaa.txt    Finds all the files named aaa.txt in the current directory or 
                         any subdirectory tree. 
 find / -name stata      Find all the files named 'stata' anywhere on the system. 
 find / -name stata 2>/dev/null
                 Find all the files named 'stata' anywhere on the system, ignoring
             any errors.
-find /usr/ -name "<em>stata</em>" <br />
+find /usr/ -name "*stata*" 
                         Find all files whose names contain the string 'stata' which 
                         exist within the '/usr/' directory tree. 
 </pre></code></p>
@@ -644,4 +637,5 @@ find /usr/ -name "<em>stata</em>" <br />
 <li>Arch linux (a different linux distribution, and my personal choice) has a very good wiki. Much of it will also be applicable to the server: <a href="">https://wiki.archlinux.org/</a></li>
 <li>Because CentOS is a RedHat-based distribution, you can also look at RedHat resources</li>
 </ul>
+
 
