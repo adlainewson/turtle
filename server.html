@@ -1,0 +1,647 @@
+<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<style type="text/css">
+@media print {
+  *,
+  *:before,
+  *:after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
+
+pre,
+code {
+  font-family: Menlo, Monaco, "Courier New", monospace;
+  white-space: pre;
+}
+
+pre {
+  padding: .5rem;
+  line-height: 1.25;
+  overflow-x: scroll;
+  white-space:pre-wrap;
+}
+
+a,
+a:visited {
+  color: #3498db;
+}
+
+a:hover,
+a:focus,
+a:active {
+  color: #2980b9;
+}
+
+.modest-no-decoration {
+  text-decoration: none;
+}
+
+html {
+  font-size: 10px;
+}
+
+@media screen and (min-width: 32rem) and (max-width: 48rem) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 48rem) {
+  html {
+    font-size: 15px;
+  }
+}
+
+body {
+  line-height: 1.85;
+}
+
+p,
+.modest-p {
+  font-size: 1rem;
+  margin-bottom: 1.3rem;
+}
+
+h1,
+.modest-h1,
+h2,
+.modest-h2,
+h3,
+.modest-h3,
+h4,
+.modest-h4 {
+  margin: 1.414rem 0 .5rem;
+  font-weight: inherit;
+  line-height: 1.42;
+}
+
+h1,
+.modest-h1 {
+  margin-top: 0;
+  font-size: 3.998rem;
+}
+
+h2,
+.modest-h2 {
+  font-size: 2.827rem;
+}
+
+h3,
+.modest-h3 {
+  font-size: 1.999rem;
+}
+
+h4,
+.modest-h4 {
+  font-size: 1.414rem;
+}
+
+h5,
+.modest-h5 {
+  font-size: 1.121rem;
+}
+
+h6,
+.modest-h6 {
+  font-size: .88rem;
+}
+
+small,
+.modest-small {
+  font-size: .707em;
+}
+
+/* https://github.com/mrmrs/fluidity */
+
+img,
+canvas,
+iframe,
+video,
+svg,
+select,
+textarea {
+  max-width: 100%;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700);
+
+@import url(http://fonts.googleapis.com/css?family=Arimo:700,700italic);
+
+html {
+  font-size: 18px;
+  max-width: 100%;
+}
+
+body {
+  color: #444;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 300;
+  margin: 0 auto;
+  max-width: 48rem;
+  line-height: 1.45;
+  padding: .25rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Arimo, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  border-bottom: 2px solid #fafafa;
+  margin-bottom: 1.15rem;
+  padding-bottom: .5rem;
+  text-align: center;
+}
+
+blockquote {
+  border-left: 8px solid #fafafa;
+  padding: 1rem;
+}
+
+pre,
+code {
+  background-color: #fafafa;
+  font-family: Menlo, Monaco, "Courier New", monospace;
+  font-size: 100%;
+  white-space: pre;
+}
+</style>
+
+<h2>VSE Server Manual</h2>
+
+<p><center>
+<img src='turtle.jpg' />
+</center></p>
+
+<p>This brief tutorial will familiarize you with how to connect to and use the VSE linux server. You first need to have an account set up for you (unrelated to your CWL).</p>
+
+<h3>Contents</h3>
+
+<p><a href="#overview">Server overview</a></p>
+
+<p><a href="#policy">Server use policy</a></p>
+
+<p><a href="#howto">How to connect</a><br>
+ 1. <a href="#vpn">Connecting to the UBC VPN</a><br>
+ 2. <a href="#vncssh">Connecting to the server</a></p>
+
+<p><a href="#transfer">Transferring files</a></p>
+
+<p><a href="#stata">Using Stata and MATLAB</a></p>
+
+<p><a href="#detach">Keep Jobs Running after Logout</a></p>
+
+<p><a href="#nice">Running Long Jobs at Lower Priority</a></p>
+
+<p><a href="#software">Downloading software</a></p>
+
+<p><a href="#linux">The linux command line</a></p>
+
+<p><a href="#res">Other resources</a></p>
+
+<p><a id="overview"></a></p>
+
+<h3>Server Overview</h3>
+
+<p>The server is running CentOS linux, which is a RedHat derivative designed specifically for servers. Check out the gritty details on the CentOS wiki: <a href="https://wiki.centos.org/">https://wiki.centos.org/</a> - but if you're new to linux this is not the place to look for information as it's aimed at server administrators; other resources will be introduced below.</p>
+
+<p>The server has 12 dual-cores, 188G of memory, and over 1TB of storage. </p>
+
+<p>Installed computational software includes: Python (2.7/3), MATLAB 2014, Stata 14, Julia, R, Dynare, and Octave. </p>
+
+<p>Currently the server is running GNOME for its default desktop environment, but XFCE and fluxbox are also installed.</p>
+
+<p><a id="policy"></a></p>
+
+<h3>Server use policy</h3>
+
+<p>The server is for computation purposes only, not for routine tasks you could do equally well on your laptop (for example, document processing or web browsing).</p>
+
+<p>Currently, the hard disk storage limit is set to 5GB for each PhD student, 2GB for each MA student. Also for each student, the memory limit is set to be 16GB.</p>
+
+<p>If you need more memory or storage space for a designated period of time, contact Masaru Kiyotaki.</p>
+
+<p>Because the processing power will be shared by all users on the server, it is important you are aware of the shared resources you are using. You can check how intensive your processes are by running <code>top -U adlai</code> in a terminal, replacing <code>adlai</code> with your username. See <code>man top</code> for further details on how to use top.</p>
+
+<p>If you don't have code running on the server, please shut down any VNC sessions you have running (ie, log out of the X windows desktop environment), because these drain resources.</p>
+
+<p>Please also read the section on <a href="#nice">Running Long Jobs at Lower Priority</a>.</p>
+
+<p><a id="howto"></a></p>
+
+<h3>How to Connect</h3>
+
+<p>There are two steps to connecting to the server. <br>
+ 1. Connect to the UBC virtual private network (VPN)<br>
+ 2. Once on the VPN, connect to the server</p>
+
+<p>Think of our server as a house in a gated community. Connecting to the UBC VPN (1) is like getting let into the gated community, and connecting to the server (2) is like getting let into the house. </p>
+
+<p><a id="vpn"></a></p>
+
+<h4>1. Connecting to the VPN</h4>
+
+<p>There are several ways of connecting to the VPN, and UBC has a page to help you:</p>
+
+<p><a href="https://it.ubc.ca/services/email-voice-internet/myvpn/setup-documents">https://it.ubc.ca/services/email-voice-internet/myvpn/setup-documents</a></p>
+
+<p>The guide recommends you use the Cisco AnyConnect client, but you can use your client of choice - the connection information is provided for a manual setup.</p>
+
+<p>If you run into trouble following their guide, the IT department or our in-house IT guy Masaru can help you out.</p>
+
+<p><a id="vncssh"></a></p>
+
+<h4>2. Connecting to the server</h4>
+
+<p>Once you're on the VPN, you can use the server in two ways: through Virtual Network Computing (VNC), or directly through Secure SHell (SSH). VNC is a popular protocol used for remote desktop access. If you have used any remote desktop software before, it's possible you have already used VNC. SSH is a way of connecting to the server using a terminal, and your interaction with the server will (not without exception) occur through the command line.</p>
+
+<p><strong>Note:</strong> VNC and SSH use different authentication systems, so you will have different passwords for both. Once logged into the server, you can use <code>passwd</code> to change your user account password (which is used by SSH) and <code>vncpasswd</code> to change your VNC password.</p>
+
+<p>When you connect to the server using VNC, you will have a window open with a miniature window manager running inside; here's a screenshot of me using VNC to access the server; you can see my desktop, and Stata running on the server</p>
+
+<p><center>
+<a href="http://i.imgur.com/fxXIyb7.png"><img src="http://i.imgur.com/fxXIyb7.png" style="width: 300px;"/></a>
+</center></p>
+
+<p>Alternatively, you can use SSH alone. Unless you are running linux on your personal computer, this will mean that you can only interface with the computer through the terminal. Here's a screenshot of me running matlab on the server after connecting through SSH, side by side with MATLAB running locally.</p>
+
+<p><center>
+<a href="http://i.imgur.com/5jRmTgP.png"><img src="http://i.imgur.com/5jRmTgP.png" style="width: 300px" /></a>
+</center></p>
+
+<p>If you want to use VNC you still have to connect via SSH, so first we'll cover that.</p>
+
+<h5>Connecting via SSH</h5>
+
+<p>If you are on Linux or Mac this is very simple, just open a terminal and type:</p>
+
+<p><code><pre>
+ssh adlai@turtle.econ.ubc.ca
+</pre></code></p>
+
+<p>Replacing <code>adlai</code> with your username. Your computer will ask if you want to trust the server's credentials; say yes, and you're connected. </p>
+
+<p>If you are on Windows you can download a graphical SSH client. One such client that I can vouch for is available here: <a href="http://www.putty.org/">http://www.putty.org/</a></p>
+
+<h5>Connecting via VNC</h5>
+
+<p>There are two steps:<br>
+1. Log into the server with SSH and start a vncserver.<br>
+2. Connect to the VNC server using a VNC client.</p>
+
+<p>First download a VNC client. Here are some options:</p>
+
+<h6>Cross Platform</h6>
+
+<p><a href="https://www.realvnc.com/download/viewer/">https://www.realvnc.com/download/viewer/</a></p>
+
+<p><a href="http://www.tightvnc.com/download.php">http://www.tightvnc.com/download.php</a></p>
+
+<h6>Mac</h6>
+
+<p>See the guide at <a href="http://osxdaily.com/2013/04/05/vnc-client-mac-os-x-screen-sharing/">http://osxdaily.com/2013/04/05/vnc-client-mac-os-x-screen-sharing/</a>.</p>
+
+<h6>Linux/UNIX</h6>
+
+<p><a href="http://tigervnc.org/">http://tigervnc.org/</a>  (Recommended!)</p>
+
+<p>Once you have the client, log into the server using SSH and change your password using <code>vncpasswd</code>. Once done, type <code>vncserver -autokill</code> to start a VNC session. You will get some output that tells you what port the VNC server is using, which will be a number in the range 5900-5999. Here is a screenshot of me logging in with SSH and starting the VNC server:</p>
+
+<p><center>
+<a href="http://i.imgur.com/TkC0LNS.png"><img src="http://i.imgur.com/TkC0LNS.png" style="width: 300px" /></a>
+</center></p>
+
+<p>My VNC server has started at address <code>turtle.econ.ubc.ca:3</code>, the 3 refers to the port 5903. Now I can log in using my VNC client using the following information:</p>
+
+<p><code><pre>
+hostname: turtle.econ.ubc.ca
+port: 590X
+</pre></code></p>
+
+<p>Where you have to replace the <code>X</code> with the port assigned to you when the server started. The VNC client will ask you for the information above, along with your VNC password. </p>
+
+<p>For example, were I to connect to the server I started above on linux using tigervnc, I would enter the command</p>
+
+<p><code><pre>
+vncviewer turtle.econ.ubc.ca:5903
+</pre></code></p>
+
+<p>Since my port is 5903. I am then prompted for a password. Once you are finished with the VNC server, log out (don't just close the window) and the VNC server will shut down. If you want to run something for a long time it is recommended you do not use VNC if possible but rather run your code in the shell, which is less of a resource drain.</p>
+
+<p>If you forget the port where VNC is running, log back in using SSH and type <code>ls ~/.vnc/*.pid</code>. If you see a file ending with .pid, it means the VNC server is still running, and the port number will be shown. Here's a picture:</p>
+
+<p><center>
+<a href="http://i.imgur.com/aOIvwNj.png"><img src="http://i.imgur.com/aOIvwNj.png" style="width: 300px" /></a>
+</center></p>
+
+<p>I have a file there called <code>turtle.econ.ubc.ca:3.pid</code>, which means I have a VNC server running on display 3 (port 5903). To shut down the server, type <code>vncserver -kill :3</code>, changing the 3 as appropriate. </p>
+
+<p><a id="transfer"></a></p>
+
+<h3>Transferring Files to and from the Server</h3>
+
+<p>Files on the server are persistent, and stored in your home directory. The location of this directory will be in the <code>home</code> folder, a subdirectory of the root <code>/</code> directory. For example, <code>/home/adlai</code>. </p>
+
+<p>Everything inside your home directory is 'yours', you can create or delete directories as you see fit. Besides the ways of transferring files you are probably familiar with (Dropbox, emailing them to yourself) you can transfer files directly using SSH. This will be very fast when you are on campus, good for large files.</p>
+
+<p>There are several ways to do this. On Linux (and possibly also Mac) you can use the <code>scp</code> command, for "Secure CoPy". Here's how it works:</p>
+
+<p>Suppose you want to copy some matlab files from a local directory <code>myproject</code> to a directory in your home folder on the server called <code>myfiles</code>. From your laptop, open a terminal, navigate to <code>myproject</code>, then type </p>
+
+<p><code><pre>
+[adlai@laptop ~]$ scp myproject/* adlai@turtle.ubc.ca:/home/adlai/myfiles/
+</pre></code></p>
+
+<p>This command says 'copy all the files (*) in <code>myproject</code>, on my machine, to the directory <code>myfiles</code>, on the server'. You will be prompted for your SSH password, then the transfer will start.</p>
+
+<p>To transfer files from the server to your local machine, you can use the same command.</p>
+
+<p><code><pre>
+[adlai@laptop ~]$ scp adlai@turtle.ubc.ca:/home/adlai/myfiles/* myproject/ 
+</pre></code></p>
+
+<p>If you are on Windows, you can accomplish something similar with a graphical SSH client like PuTTy, linked above. See the link here: <a href="http://www.it.cornell.edu/services/managed_servers/howto/file_transfer/fileputty.cfm">http://www.it.cornell.edu/services/managed<em>servers/howto/file</em>transfer/fileputty.cfm</a>.</p>
+
+<p><a id="stata"></a></p>
+
+<h3>Using Stata and Matlab</h3>
+
+<p>If you are connecting through VNC, you can open Stata and MATLAB directly from GNOME. They are found in the 'Other' catagory, when you click the Applications button in the top left.</p>
+
+<p><center>
+<a href="http://i.imgur.com/UcNNs6y.png"><img src="http://imgur.com/UcNNs6yl.png" style="width: 300px" /></a>
+</center></p>
+
+<p>Loading a dataset will be the same as on your local machine, except that the directory structure is different. Depending on where you downloaded your dataset, it will be somewhere in your home directory (which is named after your user account). In the screenshot below, I'm looking at all the folders in my home directory, called 'adlai'.</p>
+
+<p><center>
+<a href="http://i.imgur.com/6pXMDZr.png"><img src="http://imgur.com/6pXMDZrl.png" style="width: 300px" /></a>
+</center></p>
+
+<p>For MATLAB it works similarly; here's an example. </p>
+
+<p><center>
+<a href="http://i.imgur.com/W5ItbIv.png"><img src="http://imgur.com/W5ItbIvl.png" style="width: 300px" /></a>
+</center></p>
+
+<p>If you're connecting using SSH, you can use MATLAB and Stata through the command line by typing </p>
+
+<p><code><pre>
+[adlai@turtle ~]$ /usr/local/stata14/xstata-mp
+</pre></code></p>
+
+<p>This can be a bit of a pain, so in order to create an executable link to stata in your home directory, type 
+<code><pre>
+[adlai@turtle ~]$ ln -s /usr/local/stata14/xstata-mp stata14
+</pre></code></p>
+
+<p>Now you can just type <code>stata14</code> in the terminal when you're in your home directory to start Stata.</p>
+
+<p>MATLAB is already a part of the path, so to start it you can just type <code>matlab</code>.</p>
+
+<p><code><pre>
+[adlai@turtle ~]$ matlab
+</pre></code></p>
+
+<p><a id="detach"></a></p>
+
+<h3>Keeping Jobs Running on the Server after Logout</h3>
+
+<p>When you start a VNC server it will stay running until you log out (if you close your VNC viewer your VNC session stays running). If you log in with SSH, logging out will close any running jobs. To prevent this, you can use a terminal multiplexer.</p>
+
+<p>Byobu, which is a wrapper for tmux, is my multiplexer of choice, and it's installed on the server. Without getting into the details, just type <code>byobu</code>, then the command you want to run (eg: <code>matlab -nodesktop -r divide_by_zero.m</code>), then hit F6 to detach byobu. Now you can log off the SSH session and MATLAB will keep running. When you log back into the server type <code>byobu</code> again to attach back to the session.</p>
+
+<p>If you forget to use byobu, or realize you have to leave suddenly, you can still detach a running job. See here: <a href="http://www.cyberciti.biz/faq/unix-linux-disown-command-examples-usage-syntax/">http://www.cyberciti.biz/faq/unix-linux-disown-command-examples-usage-syntax/</a>.</p>
+
+<p>See here for more information on using byobu: </p>
+
+<p><a href="http://www.howtogeek.com/58487/how-to-easily-multitask-in-a-linux-terminal-with-byobu/">http://www.howtogeek.com/58487/how-to-easily-multitask-in-a-linux-terminal-with-byobu/</a></p>
+
+<p><a href="https://help.ubuntu.com/community/Byobu">https://help.ubuntu.com/community/Byobu</a> </p>
+
+<p><a id="nice"></a></p>
+
+<h3>Running Long jobs at Lower Priority</h3>
+
+<p>It's a good policy to lower priority for jobs that you will have running all night (or longer). A lower priority still means your job will run at top speed when the server is not under heavy load. </p>
+
+<p>Launch a command at a lower priority using the <code>nice</code> command (because using it makes you a nice person). The syntax is <code>nice [command]</code>, for example,</p>
+
+<p><code><pre>
+nice matlab -r max_unlikelihood.m
+</pre></code></p>
+
+<p>Jobs run without using nice have priority 0. The default value nice assigns is 10 (higher nice value means lower priority), but you can adjust this using the <code>-n</code> flag to any integer [0,19]. If you forgot to use nice when starting your job, you can use <code>renice</code> which changes the priority of a running process. See <code>man nice</code> and <code>man renice</code> for details.</p>
+
+<p><a id="software"></a></p>
+
+<h3>Downloading your own software</h3>
+
+<p>In order to keep security risks to a minimum, if you need any additional software you will need to download and install it in your home directory. This is not analogous to installing software on your personal laptop, which requires administrative privledges. </p>
+
+<p>Installing software in your home directory may entail downloading and compiling the source code for the program you want. Here are some best practices:</p>
+
+<ol>
+<li>Create a <code>bin/</code> directory in <code>$HOME</code>, and keep all your executable files there.</li>
+<li>Create a <code>tmp/</code> directory in <code>$HOME</code>, and do all your compiling and downloading there.</li>
+</ol>
+
+<p>Check the guide here <a href="https://luv.asn.au/overheads/compile.html">https://luv.asn.au/overheads/compile.html</a> on compiling source code on Linux/UNIX.</p>
+
+<p>Here's a brief and somewhat contrived example of how to download the dropbox binary and link it to the <code>~/bin</code> directory.</p>
+
+<p><code><pre>
+[adlai@turtle ~]$ mkdir tmp bin
+[adlai@turtle ~]$ cd tmp
+[adlai@turtle tmp]$ wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+[adlai@turtle tmp]$ mv .dropbox-dist/ ../; cd
+[adlai@turtle ~]$ ln -s /home/adlai/.dropbox-dist/dropboxd ~/bin/dropbox
+[adlai@turtle ~]$ ./bin/dropbox 
+</pre></code></p>
+
+<p><a id="linux"></a></p>
+
+<h3>The linux command line</h3>
+
+<p>Whether you have connected via SSH or VNC, you will eventually run into the linux command line. If you aren't already familiar with the command line it can be a bit daunting. While many stalwart linux users (myself included) tend to insist you learn the hard way - by reading huge manuals deep into the night - there are many resources available to familiarize yourself with how the command line works. The best strategy may be to google for one yourself until you find one that moves at a speed you're comfortable with. Below I present a brief introduction to the basics, largely adapted from web sources.</p>
+
+<p>When you open a terminal you will be prompted with something like the following:</p>
+
+<p><code><pre>
+[adlai@turtle ~]$ 
+</pre></code></p>
+
+<p>The username and servername are self explanatory. The <code>~</code> refers to your current location (<code>~</code> means home directory). The $ is the prompt for entering a command.</p>
+
+<p>The linux directory structure is defined relative to a root directory, which is denoted by <code>/</code>. Here's what the terminal looks like when you're in the root directory.</p>
+
+<p><code><pre>
+[adlai@turtle /]$ 
+</pre></code></p>
+
+<p>File and directory paths in UNIX use the forward slash <code>/</code> to separate directory names in a path. For example, </p>
+
+<p><code><pre>
+/              "root" directory
+/usr           directory usr (sub-directory of / "root" directory)
+/usr/STRIM100  STRIM100 is a subdirectory of /usr
+</pre></code></p>
+
+<p>One of the first things you should do is change your password from the default. You can accomplish this with the passwd command.</p>
+
+<p>Commands are entered into the terminal by typing the command name, followed by any arguments or flags you want to pass to the command. For example, the command <code>cd</code> is for change directory. If I want to change from the current directory to another (the root directory <code>/</code> for example), I would pass <code>/</code> as an argument by typing <code>cd /</code>. Here are some examples for navigating directories:</p>
+
+<p><code><pre>
+pwd               Show the "present working directory", or current directory.
+cd                Change current directory to your HOME directory.
+cd /home/adlai    Change current directory to your (my) HOME directory. 
+cd init           Change current directory to init which is a sub-directory of the current 
+                        directory.
+cd ..             Change current directory to the parent directory of the current directory.
+cd ~              Change the current directory to your home directory (same as cd /home/adlai)
+</pre></code></p>
+
+<p>Changing directories is all well and good but eventually you'll want to know the contents of the directories you're in. This is done with the <code>ls</code> command, for 'list'. Some examples:</p>
+
+<p><code><pre>
+ls           List current directory's contents
+ls /         List the root directory's contents
+ls -a        List the current directory including hidden files. Hidden files start 
+             with "." 
+ls -lh       List all the file and directory names in the current directory using 
+             long format, with human-readable measures of file size (ie, Mb instead of bytes). 
+</pre></code></p>
+
+<p>Above I passed both arguments (the second example) and flags (the -a and -lh). Think of flags as function parameters, and arguments as function inputs. The single most important command you need in linux is the <code>man</code> command, for 'manual'. The manual page lists all the possible flags and arguments, with descriptions and often examples and even email addresses of the developers. The man command takes the application you want to learn about as its argument. So, to read more about <code>cp</code>, I would do:</p>
+
+<p><code><pre>
+[adlai@turtle ~]$ man cp
+</pre></code></p>
+
+<p>You navigate the man page by pressing <code>j</code> and <code>k</code> to move up and down, and when you're done hit <code>q</code> to exit back to the terminal.Here are some examples of other common tasks:</p>
+
+<p>Moving, renaming, and copying files:</p>
+
+<p><code><pre>
+cp file1 file2          copy file1 to a new file called file2
+mv file1 newname        move/rename file1 to newname 
+mv file1 ~/AAA/         move file1 into sub-directory AAA in your home directory.
+rm file1 [file2 ...]    remove or delete a file. In UNIX [ ] refers to optional arguments.
+rm -r dir1 [dir2...]    delete the directory dir1 (dir2, dir3, ...) and everything inside it
+mkdir dir1 [dir2...]    create directories
+mkdir -p dirpath        create the directory dirpath, including all implied directories in the path.
+rmdir dir1 [dir2...]    remove an empty directory
+</pre></code></p>
+
+<p>Viewing and editing files:</p>
+
+<p><code><pre>
+cat filename      Dump a file to the screen in ascii. 
+more filename     Progressively dump a file to the screen: ENTER = one line down 
+                  SPACEBAR = page down  q=quit
+less filename     Like more, but you can use Page-Up too. Not on all systems. 
+vi filename       Edit a file using the vi editor. All UNIX systems will have vi in some form. 
+emacs filename    Edit a file using the emacs editor. Not all systems will have emacs. 
+head filename     Show the first few lines of a file.
+head -n  filename Show the first n lines of a file.
+tail filename     Show the last few lines of a file.
+tail -n filename  Show the last n lines of a file.
+</pre></code></p>
+
+<p>Searching for files: The find command</p>
+
+<p><code><pre>
+find location -name filename </p>
+
+<p>find . -name aaa.txt    Finds all the files named aaa.txt in the current directory or 
+                        any subdirectory tree. 
+find / -name stata      Find all the files named 'stata' anywhere on the system. 
+find / -name stata 2>/dev/null
+                Find all the files named 'stata' anywhere on the system, ignoring
+            any errors.
+find /usr/ -name "<em>stata</em>" <br />
+                        Find all files whose names contain the string 'stata' which 
+                        exist within the '/usr/' directory tree. 
+</pre></code></p>
+
+<p>These are just the basics; the command line is a very powerful tool once you get the hang of it. If you'd like a gentler introduction there are slower, interactive tutorials, for example, here:
+<a href="http://linuxsurvival.com/wp/?page_id=5&amp;id=0">http://linuxsurvival.com/wp/?page_id=5&amp;id=0</a></p>
+
+<p>You can also type <code>man intro</code> into a terminal to see the official linux primer.</p>
+
+<p>The rise of Ubuntu, a user-friendly linux distribution, has created wealth of answers to basic questions and newbie-friendly information. The Ubuntu forums are great places to look, and most of the information will also be applicable to CentOS.</p>
+
+<p><a id="res"></a></p>
+
+<h3>Other resources</h3>
+
+<p>For in-house help you can contact the server administrator Masaru at masaru.kiyota@ubc.ca or me at adlai.newson@gmail.com.</p>
+
+<p>There are a lot of resources out there for Linux, look for one that you like. Additionally, here are some particular resources:</p>
+
+<ul>
+<li>GNOME is the graphical desktop environment you see when you log into the VNC server. Here's the wiki <a href="">https://en.wikipedia.org/wiki/GNOME</a>.</li>
+<li>vim is the best text editor ever written, bar none. There are a ton of tutorials on the web, here's one: <a href="">https://danielmiessler.com/study/vim/</a> </li>
+<li>Arch linux (a different linux distribution, and my personal choice) has a very good wiki. Much of it will also be applicable to the server: <a href="">https://wiki.archlinux.org/</a></li>
+<li>Because CentOS is a RedHat-based distribution, you can also look at RedHat resources</li>
+</ul>
+
