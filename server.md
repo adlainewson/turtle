@@ -75,15 +75,17 @@ If you run into trouble following their guide, the IT department or our in-house
 
 Once you're on the VPN, you can use the server in two ways: through Virtual Network Computing (VNC), or directly through Secure SHell (SSH). VNC is a popular protocol used for remote desktop access. If you have used any remote desktop software before, it's possible you have already used VNC. SSH is a way of connecting to the server using a terminal, and your interaction with the server will (not without exception) occur through the command line.
 
-**Note:** VNC and SSH use different authentication systems, so you will have different passwords for both. Once logged into the server, you can use `passwd` to change your user account password (which is used by SSH) and `vncpasswd` to change your VNC password.
+**Note:** VNC and SSH use different authentication systems, so you will have different passwords for both. Once logged into the server, you can use `passwd` to change your user account password (which is used by SSH) and `vncpasswd` to change your VNC password. It's fine to use the same password for both.
 
 When you connect to the server using VNC, you will have a window open with a miniature window manager running inside; here's a screenshot of me using VNC to access the server; you can see my desktop, and Stata running on the server
 
-<a href="http://i.imgur.com/fxXIyb7.png"><img src="http://i.imgur.com/fxXIyb7.png" style="width: 300px;"/></a>
+<img src="pics/1.jpg" style="width: 300px;"/></a>
+
+**Note:** Since first writing the guide the default window manager (the graphical representation of the operating system shown in the screenshot above) has change from GNOME to XFCE. As such, the screenshots including the window manager will look different. You can change the default window manager by editing the ~/.vnc/xinitrc file; GNOME, XFCE, and i3 are available (advanced users only).
 
 Alternatively, you can use SSH alone. Unless you are running linux on your personal computer, this will mean that you can only interface with the computer through the terminal. Here's a screenshot of me running matlab on the server after connecting through SSH, side by side with MATLAB running locally.
 
-<a href="http://i.imgur.com/5jRmTgP.png"><img src="http://i.imgur.com/5jRmTgP.png" style="width: 300px" /></a>
+<img src="pics/2.png" style="width: 300px" /></a>
 
 If you want to use VNC you still have to connect via SSH, so first we'll cover that.
 
@@ -107,12 +109,12 @@ First download a VNC client. Here are some options:
 
 ###### Cross Platform
 
-[https://www.realvnc.com/download/viewer/](https://www.realvnc.com/download/viewer/)
-
 [http://www.tightvnc.com/download.php](http://www.tightvnc.com/download.php)
 
+[https://www.realvnc.com/download/viewer/](https://www.realvnc.com/download/viewer/)
+
 ###### Mac
-See the guide at [http://osxdaily.com/2013/04/05/vnc-client-mac-os-x-screen-sharing/](http://osxdaily.com/2013/04/05/vnc-client-mac-os-x-screen-sharing/).
+See the guide at [http://osxdaily.com/2013/04/05/vnc-client-mac-os-x-screen-sharing/](http://osxdaily.com/2013/04/05/vnc-client-mac-os-x-screen-sharing/). I recommend you don't use this client.
 
 ###### Linux/UNIX
 
@@ -120,7 +122,7 @@ See the guide at [http://osxdaily.com/2013/04/05/vnc-client-mac-os-x-screen-shar
 
 Once you have the client, log into the server using SSH and change your password using `vncpasswd`. Once done, type `vncserver -autokill` to start a VNC session. You will get some output that tells you what port the VNC server is using, which will be a number in the range 5900-5999. Here is a screenshot of me logging in with SSH and starting the VNC server:
 
-<a href="http://i.imgur.com/TkC0LNS.png"><img src="http://i.imgur.com/TkC0LNS.png" style="width: 300px" /></a>
+<img src="pics/3.png" style="width: 300px" /></a>
 
 My VNC server has started at address `turtle.econ.ubc.ca:3`, the 3 refers to the port 5903. Now I can log in using my VNC client using the following information:
 
@@ -141,9 +143,11 @@ Since my port is 5903. I am then prompted for a password. Once you are finished 
 
 If you forget the port where VNC is running, log back in using SSH and type `ls ~/.vnc/*.pid`. If you see a file ending with .pid, it means the VNC server is still running, and the port number will be shown. Here's a picture:
 
-<a href="http://i.imgur.com/aOIvwNj.png"><img src="http://i.imgur.com/aOIvwNj.png" style="width: 300px" /></a>
+<img src="pics/4.png" style="width: 300px" /></a>
 
 I have a file there called `turtle.econ.ubc.ca:3.pid`, which means I have a VNC server running on display 3 (port 5903). To shut down the server, type `vncserver -kill :3`, changing the 3 as appropriate. 
+
+If you really get stuck and can't log in to your vnc session, type "killall Xvnc" in your ssh session, then start a new vnc session with "vncserver -autokill", and try again.
 
 <a id="transfer"></a>
 ### Transferring Files to and from the Server
@@ -173,21 +177,15 @@ If you are on Windows, you can accomplish something similar with a graphical SSH
 ### Using Stata and Matlab
 If you are connecting through VNC, you can open Stata and MATLAB directly from GNOME. They are found in the 'Other' catagory, when you click the Applications button in the top left.
 
-<a href="http://i.imgur.com/UcNNs6y.png">
-  <img src="http://imgur.com/UcNNs6yl.png" style="width: 300px" />
-</a>
+<img src="pics/5.png" style="width: 300px" />
 
 Loading a dataset will be the same as on your local machine, except that the directory structure is different. Depending on where you downloaded your dataset, it will be somewhere in your home directory (which is named after your user account). In the screenshot below, I'm looking at all the folders in my home directory, called 'adlai'.
 
-<a href="http://i.imgur.com/6pXMDZr.png">
-  <img src="http://imgur.com/6pXMDZrl.png" style="width: 300px" />
-</a>
+<img src="pics/6.png" style="width: 300px" />
 
 For MATLAB it works similarly; here's an example. 
 
-<a href="http://i.imgur.com/W5ItbIv.png">
-  <img src="http://imgur.com/W5ItbIvl.png" style="width: 300px" />
-</a>
+<img src="pics/7.png" style="width: 300px" />
 
 If you're connecting using SSH, you can use MATLAB and Stata through the command line by typing 
 
@@ -235,6 +233,14 @@ nice matlab -r max_unlikelihood.m
 Jobs run without using nice have priority 0. The default value nice assigns is 10 (higher nice value means lower priority), but you can adjust this using the `-n` flag to any integer [0,19]. If you forgot to use nice when starting your job, you can use `renice` which changes the priority of a running process. See `man nice` and `man renice` for details.
 
 
+**Note**: If you've started a parallel processing job on MATLAB it can be a pain to go through and renice each MATLAB process. You can use this command to renice all of your MATLAB processes:
+
+```
+renice +1 $( ps -u adlai|grep MATLAB|awk '{ print $1 }' )
+```
+
+replacing 'adlai' with your username.
+
 <a id="software"></a>
 ### Downloading your own software
 In order to keep security risks to a minimum, if you need any additional software you will need to download and install it in your home directory. This is not analogous to installing software on your personal laptop, which requires administrative privledges. 
@@ -256,6 +262,8 @@ Here's a brief and somewhat contrived example of how to download the dropbox bin
 [adlai@turtle ~]$ ln -s /home/adlai/.dropbox-dist/dropboxd ~/bin/dropbox
 [adlai@turtle ~]$ ./bin/dropbox 
 ```
+
+Someone suggested to me that this no longer works; if you want dropbox google for the python script "dropbox.py", which is very easy to use.
 
 <a id="linux"></a>
 ### The linux command line
