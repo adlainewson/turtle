@@ -327,13 +327,13 @@ code {
 
 <p>When you connect to the server using VNC, you will have a window open with a miniature window manager running inside; here's a screenshot of me using VNC to access the server; you can see my desktop, and Stata running on the server</p>
 
-<p><center><img src="pics/1.jpg" style="width: 300px;"/></center></a></p>
+<p><center><a href="pics/1.jpg"><img src="pics/1.jpg" style="width: 300px;"/></a></center></a></p>
 
 <p><strong>Note:</strong> Since first writing the guide the default window manager (the graphical representation of the operating system shown in the screenshot above) has change from GNOME to XFCE. As such, the screenshots including the window manager will look different. You can change the default window manager by editing the ~/.vnc/xinitrc file; GNOME, XFCE, and i3 are available (advanced users only).</p>
 
 <p>Alternatively, you can use SSH alone. Unless you are running linux on your personal computer, this will mean that you can only interface with the computer through the terminal. Here's a screenshot of me running matlab on the server after connecting through SSH, side by side with MATLAB running locally.</p>
 
-<p><center><img src="pics/2.png" style="width: 300px" /></center></a></p>
+<p><center><a href="pics/2.png"><img src="pics/2.png" style="width: 300px" /></a></center></a></p>
 
 <p>If you want to use VNC you still have to connect via SSH, so first we'll cover that.</p>
 
@@ -373,7 +373,7 @@ ssh adlai@turtle.econ.ubc.ca
 
 <p>Once you have the client, log into the server using SSH and change your password using <code>vncpasswd</code>. Once done, type <code>vncserver -autokill</code> to start a VNC session. You will get some output that tells you what port the VNC server is using, which will be a number in the range 5900-5999. Here is a screenshot of me logging in with SSH and starting the VNC server:</p>
 
-<p><center><img src="pics/3.png" style="width: 300px" /></center></a></p>
+<p><center><a href="pics/3.png"><img src="pics/3.png" style="width: 300px" /></a></center></a></p>
 
 <p>My VNC server has started at address <code>turtle.econ.ubc.ca:3</code>, the 3 refers to the port 5903. Now I can log in using my VNC client using the following information:</p>
 
@@ -394,7 +394,7 @@ vncviewer turtle.econ.ubc.ca:5903
 
 <p>If you forget the port where VNC is running, log back in using SSH and type <code>ls ~/.vnc/*.pid</code>. If you see a file ending with .pid, it means the VNC server is still running, and the port number will be shown. Here's a picture:</p>
 
-<p><center><img src="pics/4.png" style="width: 300px" /></center></a></p>
+<p><center><a href="pics/4.png"><img src="pics/4.png" style="width: 300px" /></a></center></a></p>
 
 <p>I have a file there called <code>turtle.econ.ubc.ca:3.pid</code>, which means I have a VNC server running on display 3 (port 5903). To shut down the server, type <code>vncserver -kill :3</code>, changing the 3 as appropriate. </p>
 
@@ -432,15 +432,15 @@ vncviewer turtle.econ.ubc.ca:5903
 
 <p>If you are connecting through VNC, you can open Stata and MATLAB directly from GNOME. They are found in the 'Other' catagory, when you click the Applications button in the top left.</p>
 
-<p><center><img src="pics/5.png" style="width: 300px" /></center></p>
+<p><center><a href="pics/5.png"><img src="pics/5.png" style="width: 300px" /></a></center></p>
 
 <p>Loading a dataset will be the same as on your local machine, except that the directory structure is different. Depending on where you downloaded your dataset, it will be somewhere in your home directory (which is named after your user account). In the screenshot below, I'm looking at all the folders in my home directory, called 'adlai'.</p>
 
-<p><center><img src="pics/6.png" style="width: 300px" /></center></p>
+<p><center><a href="pics/6.png"><img src="pics/6.png" style="width: 300px" /></a></center></p>
 
 <p>For MATLAB it works similarly; here's an example. </p>
 
-<p><center><img src="pics/7.png" style="width: 300px" /></center></p>
+<p><center><a href="pics/7.png"><img src="pics/7.png" style="width: 300px" /></a></center></p>
 
 <p>If you're connecting using SSH, you can use MATLAB and Stata through the command line by typing </p>
 
