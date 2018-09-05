@@ -310,7 +310,7 @@ Installed computational software includes: Python (2.7/3), MATLAB 2014, Stata 14
 </p>
 
 <p>
-Currently the server is running GNOME for its default desktop environment, but XFCE and fluxbox are also installed.
+Currently the server is running XFCE for its default desktop environment, but GNOME, i3, and fluxbox are also installed.
 </p>
 
 <p>
@@ -350,7 +350,7 @@ Please also read the section on <a href="#nice">Running Long Jobs at Lower Prior
 <h3>How to Connect</h3>
 
 <p>
-<b>Before you can connect to the server you need to have an account set up for you.</b> Email Masaru Kiyota at <code>masaru.kiyota@ubc.ca</code>, and specify that you would like an account on the graduate computation server in the economics department.
+<b>Before you can connect to the server you need to have an account set up for you.</b> Email Masaru Kiyota at <code>masaru.kiyota@ubc.ca</code>, and specify that you would like an account on the graduate computation server in the economics department, and include 1) your full name, 2) whether you are MA or PhD, and 3) a corresponding email address.
 </p>
 
 <p>
@@ -674,7 +674,7 @@ See here for more information on using byobu:
 <h3>Running Long jobs at Lower Priority</h3>
 
 <p>
-It's a good policy to lower priority for jobs that you will have running all night (or longer). A lower priority still means your job will run at top speed when the server is not under heavy load. 
+It's <s>a good policy</s> required to lower priority for intensive jobs that you will have running for long periods of time. A lower priority still means your job will run at top speed when the server is not under heavy load. 
 </p>
 
 <p>
@@ -692,17 +692,7 @@ Jobs run without using nice have priority 0. The default value nice assigns is 1
 </p>
 
 <p>
-<strong>Note</strong>: If you've started a parallel processing job on MATLAB it can be a pain to go through and renice each MATLAB process. You can use this command to renice all of your MATLAB processes:
-</p>
-
-<p>
-<code><pre>
-renice +1 $( ps -u adlai|grep MATLAB|awk '{ print $1 }' )
-</pre></code>
-</p>
-
-<p>
-replacing 'adlai' with your username.
+<strong>Note</strong>: If you've started a parallel processing job on MATLAB it can be a pain to go through and renice each MATLAB process. You can use the command <code>renice_matlab<code> to renice all of your MATLAB processes. Type <code>renice_matlab --help</code> for usage. I also wrote a similar command <code>renice_julia</code> for julia users.
 </p>
 
 <p>
