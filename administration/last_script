@@ -1,0 +1,14 @@
+#!/bin/bash
+
+mv last_logins.csv last_logins.csv.old 2>/dev/null
+echo "username,month,day" > last_logins.csv
+for user in $(ls -1 /home); do 
+   last_login=$(last $user | head -n 1 | awk '{ print $5,$6 }' | sed 's/ /,/' )
+   if [ "$last_login" == " " ]; then
+      echo $user, >> last_logins.csv
+   else
+      echo $user,$last_login >> last_logins.csv
+   fi
+done
+
+# This produces a CSV; then stata to make a hist

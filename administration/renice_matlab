@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ "$1" == "--help" ]; then
+  echo ""    
+  echo "Usage: `basename $0` N"
+  echo ""    
+  echo "    After starting your parallell process MATLAB computation,"
+  echo "    run this script with niceval (N) an integer from 1 to 20."
+  echo "    Higher niceval means lower priority when the server gets busy."
+  echo ""    
+  echo "    N: "
+  echo "       the nicevalue. Defaults to 5"
+  echo "    --help: "
+  echo "       Prints this message."
+  echo ""    
+  echo "    NOTE: you cannot increase the priority (decrease the niceval) once set"
+  echo "          for a given parfoor loop."    
+  echo "    NOTE: you can check your processes CPU usage and nicevalue with the 'top'"
+  echo "          command."
+  exit 0
+fi
+
+renice ${1-5} $( ps -u $USER |grep MATLAB|awk '{ print $1 }' )
+
