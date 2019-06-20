@@ -1,0 +1,8 @@
+#/bin/bash
+cat turt.txt
+top -bn 1| grep %Cpu|awk '{ printf "server is currently %s idle\n",  $8 }'
+free -k | {
+    read ; read TITLE TOTAL USED REST
+    echo "the current server memory usage is $(( 100 * $USED / $TOTAL ))%"
+}
+
