@@ -277,7 +277,9 @@ This brief tutorial will familiarize you with how to connect to and use the VSE 
 
 
    <li><a href="#software">Downloading software</a></li>
+   
 
+   <li><a href="#libraries">Troubleshooting version errors</a></li>
 
 
    <li><a href="#dropbox">Dropbox</a></li>
@@ -686,6 +688,23 @@ Installing software in your home directory may entail downloading and compiling 
 
 
 Check the guide here <a href="https://luv.asn.au/overheads/compile.html">https://luv.asn.au/overheads/compile.html</a> on compiling source code on Linux/UNIX.
+<br><br>
+
+<h3><a id="libraries">Troubleshooting version errors</a></h3>
+
+CentOS is a fairly conservative operating system and you may find that the server versions of some software or libraries (particularly C libraries) will be too old for some modern software. Unfortunately there isn't much we can do to speed up updates in CentOS repositories, but you can build your software development environment in your home directory. 
+
+<br><br>
+
+See the tutorial here: <a href='https://zxkjack123.github.io/programming/install_gcc_without_root/'>https://zxkjack123.github.io/programming/install_gcc_without_root/</a>, which uses the software GSRC, available here: <a href='https://www.gnu.org/software/gsrc/'>https://www.gnu.org/software/gsrc/</a>. I will add a couple things to that howto: 
+<ol>
+   <li> The software (including libraries) you install will be in the directory you specify when configuring GSRC. For example if you ran <code>./configure --prefix=$HOME/env</code> then your libraries will be in <code>$HOME/env/lib</code> and <code>$HOME/env/usr/lib</code>. You can tell the program you are trying to run to look in these locations for libraries using the environmental variable <code>LD_LIBRARY_PATH</code>, for example, <code>LD_LIBRARY_PATH=$HOME/env/usr/lib/ ~/.dropbox-dist/dropboxd</code> should make the dropbox binary aware of the libraries you have built. (UPDATE: GSRC actually includes a script automatically set the library path - run <code>source setup.sh</code> in the GSRC directory)
+   </li>
+   <li> You can make use of the servers resources to speed up compiling by adding the flag <code>-j X</code> to your </code>make</code> commands, replacing <code>X</code> with the number of cores you want to use. Please check the server utilization by other students before choosing a high number of cores to use. For example <code>make -j 10 -c gcc8</code> compiles GCC8 using 10 cores.
+
+   </li>
+</ol>
+
 
 
 
