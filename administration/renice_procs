@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ "$1" == "--help" ]; then
+  echo ""    
+  echo "Usage: `basename $0` N"
+  echo ""    
+  echo "    After starting your processes, run this script"
+  echo "    with niceval (N) an integer from 1 to 20."
+  echo "    Higher niceval means lower priority when the server gets busy."
+  echo ""    
+  echo "    N: "
+  echo "       the nicevalue. Defaults to 5"
+  echo "    --help: "
+  echo "       Prints this message."
+  echo ""    
+  echo "    NOTE: you cannot increase the priority (decrease the niceval) once set."
+  echo ""    
+  echo "    Good examples:"
+  echo "    renice_procs python 5"
+  echo "    renice_procs julia 7"
+  echo "    renice_procs matlab 2"
+  echo "    renice_procs 'python3 /home/adlai/myscript.py' 10"
+  echo ""    
+  exit 0
+fi
+
+renice ${2-5} $( ps -u $USER |grep $1|awk '{ print $1 }' )
+
