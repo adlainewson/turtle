@@ -676,7 +676,7 @@ Jobs run without using nice have priority 0. The default value nice assigns is 1
 
 <br><br>
 
-<strong>Note</strong>: If you've started a parallel processing job on MATLAB it can be a pain to go through and renice each MATLAB process. You can use the command <code>renice_matlab</code> to renice all of your MATLAB processes. Type <code>renice_matlab --help</code> for usage. I also wrote a similar command <code>renice_julia</code> for julia users.
+<strong>Note</strong>: If you've started a parallel processing job it can be a pain to go through and renice each process. You can use the command <code>renice_procs</code> to renice all of your processes. Type <code>renice_procs --help</code> for usage. The TL;DR example use is <code>renice_procs python 5</code>, replacing 'python' as appropriate. Use <code>top -u $USER</code> to see your processes.
 
 
 
