@@ -711,7 +711,8 @@ CentOS is a fairly conservative operating system and you may find that the serve
 
 See the tutorial here: <a href='https://zxkjack123.github.io/programming/install_gcc_without_root/'>https://zxkjack123.github.io/programming/install_gcc_without_root/</a>, which uses the software GSRC, available here: <a href='https://www.gnu.org/software/gsrc/'>https://www.gnu.org/software/gsrc/</a>. I will add a couple things to that howto: 
 <ol>
-   <li> The software (including libraries) you install will be in the directory you specify when configuring GSRC. For example if you ran <code>./configure --prefix=$HOME/env</code> then your libraries will be in <code>$HOME/env/lib</code> and <code>$HOME/env/usr/lib</code>. You can tell the program you are trying to run to look in these locations for libraries using the environmental variable <code>LD_LIBRARY_PATH</code>, for example, <code>LD_LIBRARY_PATH=$HOME/env/usr/lib/ ~/.dropbox-dist/dropboxd</code> should make the dropbox binary aware of the libraries you have built. (UPDATE: GSRC actually includes a script automatically set the library path - run <code>source setup.sh</code> in the GSRC directory)
+   <li> The software (including libraries) you install will be in the directory you specify when configuring GSRC. For example if you ran <code>./configure --prefix=$HOME/env</code> then your libraries will be in <code>$HOME/env/lib</code> and <code>$HOME/env/usr/lib</code>. You can tell the program you are trying to run to look in these locations for libraries using the environmental variable <code>LD_LIBRARY_PATH</code>, for example, <code>LD_LIBRARY_PATH=$HOME/env/usr/lib/ ~/.
+    -dist/dropboxd</code> should make the dropbox binary aware of the libraries you have built. (UPDATE: GSRC actually includes a script automatically set the library path - run <code>source setup.sh</code> in the GSRC directory)
    </li>
    <li> You can make use of the servers resources to speed up compiling by adding the flag <code>-j X</code> to your </code>make</code> commands, replacing <code>X</code> with the number of cores you want to use. Please check the server utilization by other students before choosing a high number of cores to use. For example <code>make -j 10 -c gcc8</code> compiles GCC8 using 10 cores.
 
@@ -726,6 +727,8 @@ See the tutorial here: <a href='https://zxkjack123.github.io/programming/install
 
 <h3>Downloading Dropbox</h3>
 
+Support for the Dropbox software has been discontinued. You can use <code>rclone</code> to access your dropbox storage from the command line. See the documentation for <code>rclone</code> here: https://rclone.org/docs/
+<!--
 To download dropbox, run the following:
 
 
@@ -743,7 +746,7 @@ Now you can launch dropbox with the command <code>~/.dropbox-dist/dropboxd</code
 
 Not to come off like a zealot, but a few years ago I switched to using git for my research, and I can't help but preach to the uninitiated. Git is open-source software for organizing and backing up your projects. Unfortunately the learning curve is a bit steep, but I assure you if you make the investment you'll find it worthwhile, especially if you tend to have multiple projects going at once. There are hundreds of tutorials online, here's a brusque introduction aimed at academics: <a href='https://web.archive.org/web/20170328084724/http://nyuccl.org/pages/gittutorial/'>http://nyuccl.org/pages/gittutorial/</a>
 
-
+-->
 
 
 <a id="linux"></a>
