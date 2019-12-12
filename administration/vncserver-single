@@ -1,0 +1,15 @@
+#!/bin/bash
+
+NPROCS=$(ps -u $USER | grep Xvnc | wc -l)
+if (( $NPROCS > 0 )); then
+   read -p "You have $NPROCS Xvnc processes running, please have only one VNC session active at a time. Would you like me to close your existing sessions? (yes/no) " RESPONSE
+   case $RESPONSE in
+        [Yy]* ) killall -u $USER Xvnc ; echo "Done. Please re-run this command.";; 
+        [Nn]* ) echo "OK"; exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+fi
+if (( $NPROCS == 0 )); then
+   /usr/bin/vncserver $@
+fi
+
